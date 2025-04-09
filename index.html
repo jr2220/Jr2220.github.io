@@ -28,24 +28,23 @@
   <h2 id="result"></h2>
 
   <script>
-    function calculate() {
-      const buyCap = parseFloat(document.getElementById('buyCap').value);
-      const sellCap = parseFloat(document.getElementById('sellCap').value);
-      const sol = parseFloat(document.getElementById('solAmount').value);
+  function calculate() {
+    const buyCap = parseFloat(document.getElementById('buyCap').value);
+    const sellCap = parseFloat(document.getElementById('sellCap').value);
+    const bnb = parseFloat(document.getElementById('solAmount').value);
 
-      if (!buyCap || !sellCap || !sol || buyCap <= 0 || sellCap <= 0 || sol <= 0) {
-        document.getElementById('result').textContent = "Please enter valid numbers.";
-        return;
-      }
-
-      const bnb = parseFloat(document.getElementById('solAmount').value);
-      // ...
-      const returnBnb = bnb * multiple;
-
-      document.getElementById('result').textContent = 
-        `You'd make a ${multiple.toFixed(2)}x = ${returnSol.toFixed(2)} SOL`;
+    if (!buyCap || !sellCap || !bnb || buyCap <= 0 || sellCap <= 0 || bnb <= 0) {
+      document.getElementById('result').textContent = "Please enter valid numbers.";
+      return;
     }
-  </script>
+
+    const multiple = sellCap / buyCap;
+    const returnBnb = bnb * multiple;
+
+    document.getElementById('result').textContent = 
+      `You'd make a ${multiple.toFixed(2)}x = ${returnBnb.toFixed(2)} BNB`;
+  }
+</script>
   <footer style="margin-top: 50px; font-size: 0.9em; color: #888;">
   this is just for fun retard, I’m not selling my supply.<br/>
   CA: 0xbca64221ecc5c71886c0df9fe7fbc7194d4c4444
