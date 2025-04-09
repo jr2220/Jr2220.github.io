@@ -1,111 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AURABOT - AI Crypto Trading</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: url('background_image.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-    }
-    header {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 20px;
-      text-align: center;
-    }
-    header img {
-      width: 90px;
-      height: auto;
-      margin-bottom: 10px;
-    }
-    .hero {
-      text-align: center;
-      padding: 80px 20px;
-      background: rgba(0, 0, 0, 0.6);
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-    }
-    .hero a {
-      text-decoration: none;
-      background: #4caf50;
-      color: white;
-      padding: 15px 30px;
-      border-radius: 5px;
-      font-size: 1rem;
-      display: inline-block;
-      margin: 10px;
-    }
-    .connect-wallet {
-      background: #ff9800;
-    }
-    .features {
-      padding: 40px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-    .feature {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      width: 300px;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    .feature h2 {
-      color: #4caf50;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.8);
-      margin-top: 20px;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>degencalc</title>
 </head>
-<body>
-  <header>
-    <img src="A_professional_and_modern_logo_for_'AURABOT',_a_cr.png" alt="AURABOT Logo">
-    <h1>AURABOT</h1>
-    <p>AI-Powered Crypto Trading for Smarter Investments</p>
-  </header>
+<body style="font-family:sans-serif;text-align:center;padding:50px;">
+  <h1>degencalc</h1>
+  <p>a place to count your chickens before they’ve hatched</p>
 
-  <div class="hero">
-    <h1>Maximize Your Crypto Trading Potential</h1>
-    <p>Harness the power of AI-driven strategies to automate and optimize your trades.</p>
-    <a href="#features">Get Started</a>
-    <a href="#" class="connect-wallet">Connect Wallet</a>
+  <div>
+    <label>Buy Market Cap ($):<br/>
+      <input type="number" id="buyCap" />
+    </label><br/><br/>
+
+    <label>Sell Market Cap ($):<br/>
+      <input type="number" id="sellCap" />
+    </label><br/><br/>
+
+    <label>Amount of SOL:<br/>
+      <input type="number" id="solAmount" />
+    </label><br/><br/>
+
+    <button onclick="calculate()">Calculate</button>
   </div>
 
-  <section class="features" id="features">
-    <div class="feature">
-      <h2>Advanced AI Algorithms</h2>
-      <p>Automate your trades with real-time market analysis and predictive models.</p>
-    </div>
-    <div class="feature">
-      <h2>Security & Transparency</h2>
-      <p>Trade with confidence knowing your funds are secured with top-tier encryption.</p>
-    </div>
-    <div class="feature">
-      <h2>Customizable Strategies</h2>
-      <p>Adjust risk levels and tailor your trading approach with ease.</p>
-    </div>
-  </section>
+  <h2 id="result"></h2>
 
-  <footer>
-    <p>&copy; 2025 AURABOT. All rights reserved.</p>
-  </footer>
+  <script>
+    function calculate() {
+      const buyCap = parseFloat(document.getElementById('buyCap').value);
+      const sellCap = parseFloat(document.getElementById('sellCap').value);
+      const sol = parseFloat(document.getElementById('solAmount').value);
+
+      if (!buyCap || !sellCap || !sol || buyCap <= 0 || sellCap <= 0 || sol <= 0) {
+        document.getElementById('result').textContent = "Please enter valid numbers.";
+        return;
+      }
+
+      const multiple = sellCap / buyCap;
+      const returnSol = sol * multiple;
+
+      document.getElementById('result').textContent = 
+        `You'd make a ${multiple.toFixed(2)}x = ${returnSol.toFixed(2)} SOL`;
+    }
+  </script>
 </body>
 </html>
