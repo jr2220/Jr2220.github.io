@@ -27,10 +27,18 @@
 
   <h2 id="result"></h2>
 
-  <script>
+<script>
+  function parseCap(value) {
+    value = value.toLowerCase().trim();
+    if (value.endsWith('k')) {
+      return parseFloat(value.slice(0, -1)) * 1000;
+    }
+    return parseFloat(value);
+  }
+
   function calculate() {
-    const buyCap = parseFloat(document.getElementById('buyCap').value);
-    const sellCap = parseFloat(document.getElementById('sellCap').value);
+    const buyCap = parseCap(document.getElementById('buyCap').value);
+    const sellCap = parseCap(document.getElementById('sellCap').value);
     const bnb = parseFloat(document.getElementById('solAmount').value);
 
     if (!buyCap || !sellCap || !bnb || buyCap <= 0 || sellCap <= 0 || bnb <= 0) {
@@ -41,10 +49,11 @@
     const multiple = sellCap / buyCap;
     const returnBnb = bnb * multiple;
 
-    document.getElementById('result').textContent = 
+    document.getElementById('result').textContent =
       `You'd make a ${multiple.toFixed(2)}x = ${returnBnb.toFixed(2)} BNB`;
   }
-    
+</script>
+
 <footer style="margin-top: 50px; font-size: 0.9em; color: #888;">
   this is just for fun retard, I’m not selling my supply.<br/>
   CA will be posted here<br/><br/>
@@ -52,5 +61,6 @@
     Follow on Twitter
   </a>
 </footer>
+
 </body>
 </html>
